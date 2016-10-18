@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bucket {
-	private int id;
+	private String id;
 	private List<Stack> stacks;
 	
-	public Bucket(int id){
+	public Bucket(String id, List<Stack> stacks){
 		this.id = id;
-		stacks = new ArrayList<Stack>();
+		this.stacks = stacks;
 	}
 }
