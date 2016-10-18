@@ -23,7 +23,7 @@ public class BucketCreator {
 		});
 		
 		for(String directory : directories){
-			Bucket bucket = new Bucket(directory, StackCreator.listAllStackInFolder(folder + directory));
+			Bucket bucket = new Bucket(directory, StackCreator.GetAllStackInFolder(folder + directory));
 			
 			buckets.add(bucket);
 		}

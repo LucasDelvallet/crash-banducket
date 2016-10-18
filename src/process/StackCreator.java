@@ -13,7 +13,7 @@ import entities.Stack;
 
 public class StackCreator {
 	
-		static List<Stack> listAllStackInFolder(String folderName){
+		static List<Stack> GetAllStackInFolder(String folderName){
 			List<Stack> stacks = new ArrayList<Stack>();
 			
 			File folder = new File(folderName + "\\");
