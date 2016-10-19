@@ -11,7 +11,7 @@ public class StoreStack {
     private List<Bucket> buckets;
 
     public StoreStack(List<Bucket> buckets) {
-	this.buckets = buckets;
+    	this.buckets = buckets;
     }
     
     public Bucket getBestBucket(Stack stack) {
@@ -21,16 +21,12 @@ public class StoreStack {
 		for(int c=0; c < buckets.size(); c++) {
 		    double value = getBucketComparisonValue(stack, buckets.get(c));
 		    
-		    //System.out.println("Bucket : " + buckets.get(c).getId() + " Valeur : " + value + "%" );
-		    
 		    if(value > bestValue) {
 		    	bestValue = value;
 		    	position = c;
 		    }
 		}
 		
-	    //System.out.println("Bucket choisi : " + buckets.get(position).getId() + " Valeur : " + bestValue + "%" );
-	    
 		return buckets.get(position);
     }
     
@@ -54,8 +50,9 @@ public class StoreStack {
 		    double bestValue = 0;
 		    
 		    for(StackElement elementTest : stackElementTests) {
-				double currentValue = StringSimilarity.similarity(element.getSource(), elementTest.getSource());
-				if(currentValue > bestValue) {
+				//double currentValue = StringSimilarity.similarity(element.getSource(), elementTest.getSource());
+				double currentValue = StackElementComparator.getDistance(element, elementTest);
+		    	if(currentValue > bestValue) {
 				    bestValue = currentValue;
 				}
 		    }

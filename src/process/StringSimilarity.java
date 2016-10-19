@@ -15,7 +15,6 @@ public class StringSimilarity {
         return (longerLength - StringUtils.getLevenshteinDistance(longer, shorter)) /
                                                              (double) longerLength; */
         return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
- 
     }
  
     // Example implementation of the Levenshtein Edit Distance

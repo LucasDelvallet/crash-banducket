@@ -27,9 +27,9 @@ public class StackCreator {
 
 	for (String directory : directories) {
 	    try {
-		stacks.add(getStackFromFilePath(folderName + File.separator + directory + File.separator + "Stacktrace.txt"));
-	    } catch (IOException e) {
-		e.printStackTrace();
+			stacks.add(getStackFromFilePath(folderName + File.separator + directory + File.separator + "Stacktrace.txt"));
+		    } catch (IOException e) {
+			e.printStackTrace();
 	    }
 	}
 
@@ -37,8 +37,8 @@ public class StackCreator {
     }
     
     public static Stack getStackFromFilePath(String path) throws IOException {
-	byte[] encoded = Files.readAllBytes(Paths.get(path));
-	String source = new String(encoded);
-	return new Stack(source, StackParser.getAllStackElement(source));
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		String source = new String(encoded);
+		return new Stack(source, StackParser.getAllStackElement(source));
     }
 }
