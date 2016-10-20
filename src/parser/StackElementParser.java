@@ -22,22 +22,16 @@ public class StackElementParser {
 			addr = split[index];
 			index += 3;
 		}
-
-		method = split[index];
-		do {
-			if (split.length > index + 1 && split[index + 1].contains("=")
-					&& (!(split[index + 1].startsWith("(") && split[index + 1].endsWith(")")))) {
-				//Argument arg = new Argument(split[index + 1].split("=")[0].replace("(", ""),
-				//		split[index + 1].split("=")[1].replace(",", "").replace(")", ""));
-				//arguments.add(arg);
-			}
-			index++;
-		} while (split.length < index && !split[index].endsWith(")"));
-
-		if (split.length < index && (split[index + 1].equals("from") || split[index + 1].equals("at"))) {
-			path = split[index + 2];
-		}
-
+		
+		//A NE PAS EFFACER :
+		// Voici les regex pour un peu tout : 
+		// Méthode : (  [a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \()
+		// Arguments de méthode : \((|[\x00-\x27|\x2A-\xAA]*)\)
+		// path : (?<=from|at) [a-zA-Z0-9/\-\\.]*
+		
+		method = source.split("(  [a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \\()")[0].replace(" ", "").replace("(", "");
+		arguments.add(new Argument(source.split("\\((|[\\x00-\\x27|\\x2A-\\xAA]*)\\)")[0], ""));
+		path =  source.split("(?<=from|at) [a-zA-Z0-9/\\-\\\\.]*")[0];
 		vars = "";
 
 		return new StackElement(source, addr, method, arguments, path, vars);
