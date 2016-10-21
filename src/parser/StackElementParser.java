@@ -32,7 +32,7 @@ public class StackElementParser {
 		method = source.split("(  [a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \\()")[0].replace(" ", "").replace("(", "");
 		arguments.add(new Argument(source.split("\\((|[\\x00-\\x27|\\x2A-\\xAA]*)\\)")[0], ""));
 		path =  source.split("(?<=from|at) [a-zA-Z0-9/\\-\\\\.]*")[0];
-		vars = "";
+		//vars = "";
 
 		return new StackElement(source, addr, method, arguments, path, vars);
 
