@@ -47,32 +47,13 @@ public class StoreStack {
 		List<StackElement> stackElementTests = stackTest.getElements();
 
 		for (int i = 0; i < stackElements.size(); i++) {
-
 			StackElement element = stackElements.get(i);
-			double bestValue = 0;
-
+			double value = 0;
+			
 			if (stackElementTests.size() > i) {
-				bestValue = StackElementComparator.getDistance(element, stackElementTests.get(i));
-
-				values.add(bestValue);
+				value = StackElementComparator.getDistance(element, stackElementTests.get(i));
+				values.add(value);
 			}
-
-			// Ce n'est pas pertinent. Cela fausse les résultats en plus d'être
-			// très couteux en energie.
-			//
-			// for(StackElement element : stackElements) {
-			// for(StackElement elementTest : stackElementTests) {
-			// double currentValue =
-			// StringSimilarity.similarity(element.getSource(),
-			// elementTest.getSource());
-			// double currentValue = StackElementComparator.getDistance(element,
-			// elementTest);
-			// if(currentValue > bestValue) {
-			// bestValue = currentValue;
-			// }
-			// }
-			// }
-
 		}
 
 		return getSumValues(values) / values.size();

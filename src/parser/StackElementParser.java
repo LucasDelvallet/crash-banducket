@@ -2,6 +2,8 @@ package parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import entities.Argument;
 import entities.StackElement;
@@ -14,27 +16,32 @@ public class StackElementParser {
 		List<Argument> arguments = new ArrayList<Argument>();
 		String path = "";
 		String vars = "";
-
-		String[] split = source.split("\\s+");
-
-		int index = 0;
-		if (split[index].startsWith("0x")) {
-			addr = split[index];
-			index += 3;
-		}
 		
 		//A NE PAS EFFACER :
 		// Voici les regex pour un peu tout : 
-		// Méthode : (  [a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \()
+		// Méthode : ([a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \()
 		// Arguments de méthode : \((|[\x00-\x27|\x2A-\xAA]*)\)
 		// path : (?<=from|at) [a-zA-Z0-9/\-\\.]*
+		if(source.startsWith("0x")){
+			method = regexFinder(source, "((?!([a-z0-9]* in )) [a-zA-Z_?]* \\()").replace(" ", "").replace("(", "");
+		}else{
+			method = regexFinder(source, "([a-zA-Z_?]* )").replace(" ", "").replace("(", "");
+		}
 		
-		method = source.split("(  [a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \\()")[0].replace(" ", "").replace("(", "");
-		arguments.add(new Argument(source.split("\\((|[\\x00-\\x27|\\x2A-\\xAA]*)\\)")[0], ""));
-		path =  source.split("(?<=from|at) [a-zA-Z0-9/\\-\\\\.]*")[0];
+		arguments.add(new Argument(regexFinder(source,"\\((|[\\x00-\\x27|\\x2A-\\xAA]*)\\)"), ""));
+		path =  regexFinder(source,"(?<=from|at) [a-zA-Z0-9/\\-\\\\.]*");
 		//vars = "";
 
 		return new StackElement(source, addr, method, arguments, path, vars);
 
+	}
+	
+	private static String regexFinder(String source, String regex){
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(source);
+		if(m.find()){
+			return m.group(0);
+		}
+		return "";
 	}
 }
