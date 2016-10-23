@@ -24,9 +24,11 @@ public class StackElementComparator {
 		for (Argument arg1 : se1.arguments) {
 			for (Argument arg2 : se2.arguments) {
 				values.add(StringSimilarity.similarity(arg1.name, arg2.name));
-				//values.add(StringSimilarity.similarity(arg1.value, arg2.value));
+				values.add(StringSimilarity.similarity(arg1.value, arg2.value));
 			}
 		}
+
+		//values.add(StringSimilarity.similarity(se1.vars, se2.vars));
 
 		return getSumValues(values) / values.size();
 	}

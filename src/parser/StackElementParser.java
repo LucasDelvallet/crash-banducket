@@ -22,7 +22,9 @@ public class StackElementParser {
 		// Méthode : ([a-zA-Z_?]* )|((?!([a-z0-9]* in )) [a-zA-Z_?]* \()
 		// Arguments de méthode : \((|[\x00-\x27|\x2A-\xAA]*)\)
 		// path : (?<=from|at) [a-zA-Z0-9/\-\\.]*
+		// vars : ([a-zA-Z0-9_]* = [\x00-\xAA]*)
 		if(source.startsWith("0x")){
+			addr = source.split(" ")[0];
 			method = regexFinder(source, "((?!([a-z0-9]* in )) [a-zA-Z_?]* \\()").replace(" ", "").replace("(", "");
 		}else{
 			method = regexFinder(source, "([a-zA-Z_?]* )").replace(" ", "").replace("(", "");
@@ -30,7 +32,7 @@ public class StackElementParser {
 		
 		arguments.add(new Argument(regexFinder(source,"\\((|[\\x00-\\x27|\\x2A-\\xAA]*)\\)"), ""));
 		path =  regexFinder(source,"(?<=from|at) [a-zA-Z0-9/\\-\\\\.]*");
-		//vars = "";
+		vars = regexFinder(source, "([a-zA-Z0-9_]* = [\\x00-\\xAA]*)");
 
 		return new StackElement(source, addr, method, arguments, path, vars);
 

@@ -15,7 +15,7 @@ public class Stack {
 	    return elements;
 	}
 	
-	public StackElement getMostSignificantStackElement(){
+	public int getMostSignificantStackElementIndex(){
 		
 		int index = 0;
 		int lastScore = 0;
@@ -34,9 +34,9 @@ public class Stack {
 			if(!e.arguments.equals("")){
 				score++;
 			}
-			if(!e.vars.equals("")){
-				score++;
-			}
+			//if(!e.vars.equals("")){
+			//	score++;
+			//}
 			if(score > lastScore){
 				index = i;
 				lastScore = score;
@@ -44,6 +44,6 @@ public class Stack {
 		}
 		
 		
-		return elements.get(index);
+		return index;
 	}
 }

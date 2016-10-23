@@ -26,6 +26,8 @@ public class StoreStack {
 				position = c;
 			}
 		}
+		
+		//System.out.println(bestValue*100+"%");
 
 		return buckets.get(position);
 	}
@@ -34,11 +36,16 @@ public class StoreStack {
 		ArrayList<Double> values = new ArrayList<>();
 		List<Stack> stacks = bucket.getStacks();
 
+		double bestValue = 0;
 		for (Stack stackTest : stacks) {
-			values.add(getStackComparisonValue(stack, stackTest));
+			double value = getStackComparisonValue(stack, stackTest);
+			values.add(value);
+			if (value > bestValue) {
+				bestValue = value;
+			}
 		}
-
-		return getSumValues(values) / values.size();
+		return bestValue;
+		//return getSumValues(values) / values.size();
 	}
 
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
@@ -46,17 +53,14 @@ public class StoreStack {
 		List<StackElement> stackElements = stack.getElements();
 		List<StackElement> stackElementTests = stackTest.getElements();
 
-		values.add(StackElementComparator.getDistance(stackTest.getMostSignificantStackElement(), stack.getMostSignificantStackElement()));
+		int indexTest = stackTest.getMostSignificantStackElementIndex();
+		int index = indexTest; ;
+		
+		if(indexTest >= stackElements.size()){
+			index = stack.getMostSignificantStackElementIndex();
+		}
+		values.add(StackElementComparator.getDistance(stackElements.get(index), stackElementTests.get(indexTest)));
 
-		//double bestValue = 0;
-		//for (int i = 0; i < stackElements.size(); i++) {
-		//	StackElement element = stackElements.get(i);
-		//	double value = StackElementComparator.getDistance(element, stackTest.getMostSignificantStackElement());
-		//	if(value > bestValue){
-		//		bestValue = value;
-		//	}
-		//}
-		//values.add(bestValue);
 
 		return getSumValues(values) / values.size();
 	}
