@@ -46,15 +46,17 @@ public class StoreStack {
 		List<StackElement> stackElements = stack.getElements();
 		List<StackElement> stackElementTests = stackTest.getElements();
 
-		for (int i = 0; i < stackElements.size(); i++) {
-			StackElement element = stackElements.get(i);
-			double value = 0;
-			
-			if (stackElementTests.size() > i) {
-				value = StackElementComparator.getDistance(element, stackElementTests.get(i));
-				values.add(value);
-			}
-		}
+		values.add(StackElementComparator.getDistance(stackTest.getMostSignificantStackElement(), stack.getMostSignificantStackElement()));
+
+		//double bestValue = 0;
+		//for (int i = 0; i < stackElements.size(); i++) {
+		//	StackElement element = stackElements.get(i);
+		//	double value = StackElementComparator.getDistance(element, stackTest.getMostSignificantStackElement());
+		//	if(value > bestValue){
+		//		bestValue = value;
+		//	}
+		//}
+		//values.add(bestValue);
 
 		return getSumValues(values) / values.size();
 	}

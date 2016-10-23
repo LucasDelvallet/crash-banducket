@@ -12,7 +12,13 @@ public class StackElementComparator {
 		ArrayList<Double> values = new ArrayList<>();
 
 		values.add(StringSimilarity.similarity(se1.addr, se2.addr));
-		values.add(StringSimilarity.similarity(se1.method, se2.method));
+		//values.add(StringSimilarity.similarity(se1.method, se2.method));
+		if(se1.method.equals(se2.method)){
+			values.add((double) 1);
+		}else{
+			values.add((double) 0);
+		}
+		
 		values.add(StringSimilarity.similarity(se1.path, se2.path));
 
 		for (Argument arg1 : se1.arguments) {

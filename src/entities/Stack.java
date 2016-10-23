@@ -14,4 +14,36 @@ public class Stack {
 	public List<StackElement> getElements() {
 	    return elements;
 	}
+	
+	public StackElement getMostSignificantStackElement(){
+		
+		int index = 0;
+		int lastScore = 0;
+		for(int i = 0; i < elements.size(); i++){
+			int score = 0;
+			StackElement e = elements.get(i);
+			if(!e.addr.equals("")){
+				score++;
+			}
+			if(!e.method.equals("") && !e.method.equals("??")){
+				score++;
+			}
+			if(!e.path.equals("")){
+				score++;
+			}
+			if(!e.arguments.equals("")){
+				score++;
+			}
+			if(!e.vars.equals("")){
+				score++;
+			}
+			if(score > lastScore){
+				index = i;
+				lastScore = score;
+			}
+		}
+		
+		
+		return elements.get(index);
+	}
 }
