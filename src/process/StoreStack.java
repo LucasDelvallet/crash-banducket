@@ -61,7 +61,6 @@ public class StoreStack {
 		}
 		values.add(StackElementComparator.getDistance(stackElements.get(index), stackElementTests.get(indexTest)));
 
-
 		return getSumValues(values) / values.size();
 	}
 
