@@ -23,7 +23,7 @@ public class StackElementComparator {
 
 		values.add(StringSimilarity.similarity(se1.arguments, se2.arguments));
 
-		//values.add(StringSimilarity.similarity(se1.vars, se2.vars));
+		values.add(StringSimilarity.similarity(se1.vars, se2.vars));
 
 		return getSumValues(values) / values.size();
 	}

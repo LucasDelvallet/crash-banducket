@@ -23,20 +23,20 @@ public class Stack {
 			int score = 0;
 			StackElement e = elements.get(i);
 			if(!e.addr.equals("")){
-				score++;
+			//	score++;
 			}
 			if(!e.method.equals("") && !e.method.equals("??")){
 				score++;
 			}
 			if(!e.path.equals("")){
-				score++;
-			}
-			if(!e.arguments.equals("")){
-				score++;
-			}
-			//if(!e.vars.equals("")){
 			//	score++;
-			//}
+			}
+			if(!e.arguments.equals("") && !e.arguments.equals("()")){
+			//	score++;
+			}
+			if(!e.vars.equals("")){
+			//	score++;
+			}
 			if(score > lastScore){
 				index = i;
 				lastScore = score;
