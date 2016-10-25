@@ -1,11 +1,7 @@
 package parser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import entities.Argument;
 import entities.StackElement;
 
 public class StackElementParser {
