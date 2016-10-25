@@ -18,8 +18,8 @@ public class StackElementComparator {
 			} else {
 				values.add((double) 0);
 			}
-			//values.add(StringSimilarity.similarity(se1.arguments, se2.arguments));
-			values.add(StringSimilarity.similarity(se1.path, se2.path));
+			values.add(StringSimilarity.similarity(se1.arguments, se2.arguments));
+			//values.add(StringSimilarity.similarity(se1.path, se2.path));
 			//values.add(StringSimilarity.similarity(se1.vars, se2.vars));
 
 			return getSumValues(values) / values.size();
