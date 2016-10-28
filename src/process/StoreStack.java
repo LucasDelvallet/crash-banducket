@@ -118,20 +118,16 @@ public class StoreStack {
 	}
 
 	public double getPercentThatMatch(Method[] m1, Method[] m2) {
-		Arrays.sort(m1);
-		Arrays.sort(m2);
+		//Arrays.sort(m1);
+		//Arrays.sort(m2);
 		int i = 0, n = 0, match = 0;
 
 		while (i < m1.length && n < m2.length) {
-			if (m1[i].name.compareTo(m2[n].name) < 0) {
-				i++;
-			} else if (m1[i].name.compareTo(m2[n].name) > 0) {
-				n++;
-			} else {
+			if(m1[i].name.compareTo(m2[n].name) == 0){
 				match++;
-				i++;
-				n++;
 			}
+			i++;
+			n++;
 		}
 
 		return ((double) match / ((double) Math.max(m1.length, m2.length)));
