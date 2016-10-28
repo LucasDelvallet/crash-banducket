@@ -16,34 +16,29 @@ public class Stack {
 	}
 	
 	public int getMostSignificantStackElementIndex(){
-		
 		int index = 0;
 		int lastScore = 0;
 		for(int i = 0; i < elements.size(); i++){
-			int score = 0;
+			
 			StackElement e = elements.get(i);
-			if(!e.addr.equals("")){
-			//	score++;
-			}
-			if(!e.method.equals("") && !e.method.equals("??")){
-				score++;
-			}
-			if(!e.path.equals("")){
-			//	score++;
-			}
-			if(!e.arguments.equals("") && !e.arguments.equals("()")){
-			//	score++;
-			}
-			if(!e.vars.equals("")){
-			//	score++;
-			}
-			if(score > lastScore){
+			
+			if(e.score > lastScore){
 				index = i;
-				lastScore = score;
+				lastScore = e.score;
 			}
 		}
 		
-		
 		return index;
+	}
+	
+	public int getStackElementWithSpecificScore(int score){
+		for(int i = 0; i < elements.size(); i++){
+			StackElement e = elements.get(i);
+			if(e.score == score){
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 }
