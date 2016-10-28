@@ -24,12 +24,11 @@ public class StoreStack {
 		for (int c = 0; c < buckets.size(); c++) {
 			double value = getBucketComparisonValue(stack, buckets.get(c));
 
-			// if(value == bestValue){
-			// if(buckets.get(c).getStacks().size() >
-			// buckets.get(position).getStacks().size()){
-			// position = c;
-			// }
-			// }
+			if (value == bestValue) {
+				if (buckets.get(c).getStacks().size() > buckets.get(position).getStacks().size()) {
+					position = c;
+				}
+			}
 
 			if (value > bestValue) {
 				bestValue = value;
@@ -54,9 +53,6 @@ public class StoreStack {
 			if (value > bestValue) {
 				bestValue = value;
 			}
-
-			// System.out.println(new DecimalFormat("#.##").format(value*100)+"%
-			// ");
 		}
 
 		return bestValue;
@@ -64,11 +60,13 @@ public class StoreStack {
 	}
 
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
+		return (methodLikelinessMethod(stackTest, stack) + levensteinMethod(stackTest, stack)) / 2;
+	}
+
+	public double levensteinMethod(Stack stackTest, Stack stack) {
 		List<StackElement> stackElements = stack.getElements();
 		List<StackElement> stackElementTests = stackTest.getElements();
 
-		// Méthode 1 :
-		// Méthode Levenshtein
 		int indexTest = stackTest.getMostSignificantStackElementIndex();
 		int index = indexTest;
 
@@ -82,24 +80,24 @@ public class StoreStack {
 		StackElement eT = stackElementTests.get(indexTest);
 		StackElement e = stackElements.get(index);
 
-		// Méthode 2 :
-		// Comparaison de méthode.
+		return StackElementComparator.getDistance(eT, e);
+	}
+
+	public double methodLikelinessMethod(Stack stackTest, Stack stack) {
+		List<StackElement> stackElements = stack.getElements();
+		List<StackElement> stackElementTests = stackTest.getElements();
 		List<Method> methods = new ArrayList<Method>();
+		List<Method> methodsTest = new ArrayList<Method>();
 
 		int i = 0;
 		for (StackElement eS : stackElements) {
-			// if (!eS.method.equals("??")) {
 			methods.add(new Method(eS.method, i));
-			// }
 			i++;
 		}
 
-		List<Method> methodsTest = new ArrayList<Method>();
 		i = 0;
 		for (StackElement eS : stackElementTests) {
-			// if (!eS.method.equals("??")) {
 			methodsTest.add(new Method(eS.method, i));
-			// }
 			i++;
 		}
 
@@ -113,17 +111,13 @@ public class StoreStack {
 			return 0;
 		}
 
-		// On fait la moyenne des 2 méthodes. ET PAF, ça fait des chocapics.
-		return (getPercentThatMatch(m, mT) + StackElementComparator.getDistance(eT, e)) / 2;
+		return getPercentThatMatch(m, mT);
 	}
 
 	public double getPercentThatMatch(Method[] m1, Method[] m2) {
-		//Arrays.sort(m1);
-		//Arrays.sort(m2);
 		int i = 0, n = 0, match = 0;
-
 		while (i < m1.length && n < m2.length) {
-			if(m1[i].name.compareTo(m2[n].name) == 0){
+			if (m1[i].name.compareTo(m2[n].name) == 0) {
 				match++;
 			}
 			i++;
