@@ -1,6 +1,6 @@
 package entities;
 
-public class StackElement {
+public class StackFrame {
 	private String source;
 	public String addr;
 	public String method;
@@ -9,7 +9,7 @@ public class StackElement {
 	public String vars;
 	public int score;
 
-	public StackElement(String source, String addr, String method, String arguments, String path, String vars) {
+	public StackFrame(String source, String addr, String method, String arguments, String path, String vars) {
 		this.source = source;
 		this.addr = addr;
 		this.method = method;
@@ -21,7 +21,7 @@ public class StackElement {
 
 	private void computeScore() {
 		score = 0;
-		
+
 		if (!this.addr.equals("")) {
 			score++;
 		}
@@ -32,10 +32,10 @@ public class StackElement {
 			score++;
 		}
 		if (!this.arguments.equals("") && !this.arguments.equals("()")) {
-		//	score++;
+			// score++;
 		}
 		if (!this.vars.equals("")) {
-		//	score++;
+			// score++;
 		}
 	}
 
