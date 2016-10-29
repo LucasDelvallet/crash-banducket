@@ -3,22 +3,21 @@ package parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.StackElement;
+import entities.StackFrame;
 
 public class StackParser {
 
-    public static List<StackElement> getAllStackElement(String source) {
+	public static List<StackFrame> getAllStackElement(String source) {
 		String[] stackElementSource = source.split("#([0-9])+( )+");
-		
-		ArrayList<StackElement> stackElements = new ArrayList<>();
-		for(String s : stackElementSource) {
-		    if(!s.isEmpty()) {
-		    	stackElements.add(StackElementParser.parseStackElementFromString(s));
-		    }
+
+		ArrayList<StackFrame> stackElements = new ArrayList<>();
+		for (String s : stackElementSource) {
+			if (!s.isEmpty()) {
+				stackElements.add(StackElementParser.parseStackElementFromString(s));
+			}
 		}
-		
+
 		return stackElements;
-    }
-    
-    
+	}
+
 }

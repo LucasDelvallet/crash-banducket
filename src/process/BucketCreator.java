@@ -9,23 +9,23 @@ import entities.Bucket;
 
 public class BucketCreator {
 
-    public static List<Bucket> GetAllBucketInFolder(String folder) {
-	List<Bucket> buckets = new ArrayList<Bucket>();
+	public static List<Bucket> GetAllBucketInFolder(String folder) {
+		List<Bucket> buckets = new ArrayList<Bucket>();
 
-	File file = new File(folder);
-	String[] directories = file.list(new FilenameFilter() {
-	    @Override
-	    public boolean accept(File current, String name) {
-		return new File(current, name).isDirectory();
-	    }
-	});
+		File file = new File(folder);
+		String[] directories = file.list(new FilenameFilter() {
+			@Override
+			public boolean accept(File current, String name) {
+				return new File(current, name).isDirectory();
+			}
+		});
 
-	for (String directory : directories) {
-	    Bucket bucket = new Bucket(directory, StackCreator.GetAllStackInFolder(folder + directory));
+		for (String directory : directories) {
+			Bucket bucket = new Bucket(directory, StackCreator.GetAllStackInFolder(folder + directory));
 
-	    buckets.add(bucket);
+			buckets.add(bucket);
+		}
+
+		return buckets;
 	}
-
-	return buckets;
-    }
 }
