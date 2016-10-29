@@ -38,6 +38,6 @@ public class StackCreator {
 	public static Stack getStackFromFilePath(String path) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		String source = new String(encoded);
-		return new Stack(source, StackParser.getAllStackElement(source));
+		return new Stack(source, StackParser.getAllStackFrame(source));
 	}
 }

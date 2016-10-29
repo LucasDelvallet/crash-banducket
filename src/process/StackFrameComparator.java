@@ -5,7 +5,7 @@ import java.util.List;
 
 import entities.StackFrame;
 
-public class StackElementComparator {
+public class StackFrameComparator {
 
 	static double getDistance(StackFrame se1, StackFrame se2) {
 		if (se1.score == se2.score) {

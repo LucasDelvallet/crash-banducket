@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import entities.StackFrame;
 
-public class StackElementParser {
+public class StackFrameParser {
 
-	public static StackFrame parseStackElementFromString(String source) {
+	public static StackFrame parseStackFrameFromString(String source) {
 		String addr = "";
 		String method = "";
 		String arguments = "";

@@ -3,24 +3,24 @@ package entities;
 import java.util.List;
 
 public class Stack {
-	private List<StackFrame> elements;
+	private List<StackFrame> frames;
 	private String content;
 
-	public Stack(String content, List<StackFrame> elements) {
+	public Stack(String content, List<StackFrame> frames) {
 		this.content = content;
-		this.elements = elements;
+		this.frames = frames;
 	}
 
-	public List<StackFrame> getElements() {
-		return elements;
+	public List<StackFrame> getFrames() {
+		return frames;
 	}
 
-	public int getMostSignificantStackElementIndex() {
+	public int getMostSignificantStackFrameIndex() {
 		int index = 0;
 		int lastScore = 0;
-		for (int i = 0; i < elements.size(); i++) {
+		for (int i = 0; i < frames.size(); i++) {
 
-			StackFrame e = elements.get(i);
+			StackFrame e = frames.get(i);
 
 			if (e.score > lastScore) {
 				index = i;
@@ -31,9 +31,9 @@ public class Stack {
 		return index;
 	}
 
-	public int getStackElementWithSpecificScore(int score) {
-		for (int i = 0; i < elements.size(); i++) {
-			StackFrame e = elements.get(i);
+	public int getStackFrameWithSpecificScore(int score) {
+		for (int i = 0; i < frames.size(); i++) {
+			StackFrame e = frames.get(i);
 			if (e.score == score) {
 				return i;
 			}

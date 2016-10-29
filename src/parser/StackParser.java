@@ -7,17 +7,17 @@ import entities.StackFrame;
 
 public class StackParser {
 
-	public static List<StackFrame> getAllStackElement(String source) {
-		String[] stackElementSource = source.split("#([0-9])+( )+");
+	public static List<StackFrame> getAllStackFrame(String source) {
+		String[] stackFrameSource = source.split("#([0-9])+( )+");
 
-		ArrayList<StackFrame> stackElements = new ArrayList<>();
-		for (String s : stackElementSource) {
+		ArrayList<StackFrame> stackFrames = new ArrayList<>();
+		for (String s : stackFrameSource) {
 			if (!s.isEmpty()) {
-				stackElements.add(StackElementParser.parseStackElementFromString(s));
+				stackFrames.add(StackFrameParser.parseStackFrameFromString(s));
 			}
 		}
 
-		return stackElements;
+		return stackFrames;
 	}
 
 }

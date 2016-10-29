@@ -10,39 +10,39 @@ import entities.StackFrame;
 public class StackComparator {
 
 	public static double levensteinMethod(Stack stackTest, Stack stack) {
-		List<StackFrame> stackElements = stack.getElements();
-		List<StackFrame> stackElementTests = stackTest.getElements();
+		List<StackFrame> stackFrames = stack.getFrames();
+		List<StackFrame> stackFrameTests = stackTest.getFrames();
 
-		int indexTest = stackTest.getMostSignificantStackElementIndex();
+		int indexTest = stackTest.getMostSignificantStackFrameIndex();
 		int index = indexTest;
 
-		if (indexTest >= stackElements.size()) {
-			index = stack.getStackElementWithSpecificScore(stackElementTests.get(indexTest).score);
+		if (indexTest >= stackFrames.size()) {
+			index = stack.getStackFrameWithSpecificScore(stackFrameTests.get(indexTest).score);
 			if (index == -1) {
-				index = stack.getMostSignificantStackElementIndex();
+				index = stack.getMostSignificantStackFrameIndex();
 			}
 		}
 
-		StackFrame eT = stackElementTests.get(indexTest);
-		StackFrame e = stackElements.get(index);
+		StackFrame eT = stackFrameTests.get(indexTest);
+		StackFrame e = stackFrames.get(index);
 
-		return StackElementComparator.getDistance(eT, e);
+		return StackFrameComparator.getDistance(eT, e);
 	}
 
 	public static double methodLikelinessMethod(Stack stackTest, Stack stack) {
-		List<StackFrame> stackElements = stack.getElements();
-		List<StackFrame> stackElementTests = stackTest.getElements();
+		List<StackFrame> stackFrames = stack.getFrames();
+		List<StackFrame> stackFrameTests = stackTest.getFrames();
 		List<Method> methods = new ArrayList<Method>();
 		List<Method> methodsTest = new ArrayList<Method>();
 
 		int i = 0;
-		for (StackFrame eS : stackElements) {
+		for (StackFrame eS : stackFrames) {
 			methods.add(new Method(eS.method, i));
 			i++;
 		}
 
 		i = 0;
-		for (StackFrame eS : stackElementTests) {
+		for (StackFrame eS : stackFrameTests) {
 			methodsTest.add(new Method(eS.method, i));
 			i++;
 		}
