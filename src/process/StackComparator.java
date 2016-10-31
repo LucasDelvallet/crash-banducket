@@ -9,6 +9,7 @@ import entities.StackFrame;
 
 public class StackComparator {
 
+	// METHODE 1
 	public static double levensteinMethod(Stack stackTest, Stack stack) {
 		List<StackFrame> stackFrames = stack.getFrames();
 		List<StackFrame> stackFrameTests = stackTest.getFrames();
@@ -29,6 +30,7 @@ public class StackComparator {
 		return StackFrameComparator.getDistance(eT, e);
 	}
 
+	// METHODE 2
 	public static double methodLikelinessMethod(Stack stackTest, Stack stack) {
 		List<StackFrame> stackFrames = stack.getFrames();
 		List<StackFrame> stackFrameTests = stackTest.getFrames();
@@ -72,4 +74,45 @@ public class StackComparator {
 
 		return ((double) match / ((double) Math.max(m1.length, m2.length)));
 	}
+
+	// METHODE 3
+	public static double pointClassifiers(Stack stackTest, Stack stack) {
+		double score = 0;
+
+		List<StackFrame> stackFrames = stack.getFrames();
+		List<StackFrame> stackFrameTests = stackTest.getFrames();
+
+		int decalage = 0;
+		
+		for(int i = 0; i < stackFrameTests.size(); i++){
+			if (stackFrames.get(0).method.equals(stackFrameTests.get(i).method)) {
+				decalage = i;
+				break;
+			}
+		}
+		
+		for (int i = 0; i < stackFrames.size() && (i + decalage) < stackFrameTests.size(); i++) {
+			StackFrame sF = stackFrames.get(i);
+			StackFrame sFT = stackFrameTests.get(i + decalage);
+
+			if (sF.method.equals(sFT.method)) {
+				score += (double) ((double) 5 / (double) (i + 1));
+			}
+			if (sF.path.equals(sFT.path)) {
+				score += (double) ((double) 4 / (double) (i + 1));
+			}
+			if (sF.addr.equals(sFT.addr)) {
+				score += (double) ((double) 3 / (double) (i + 1));
+			}			
+			if (sF.arguments.equals(sFT.arguments)) {
+				score += (double) ((double) 2 / (double) (i + 1));
+			}
+			if (sF.vars.equals(sFT.vars)) {
+				score += (double) ((double) 1 / (double) (i + 1));
+			}
+		}
+
+		return score;
+	}
+
 }

@@ -1,5 +1,6 @@
 package process;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Bucket;
@@ -31,8 +32,7 @@ public class StoreStack {
 			}
 		}
 
-		// System.out.print(new DecimalFormat("#.##").format(bestValue*100)+"%
-		// ");
+		//System.out.print(new DecimalFormat("#.##").format(bestValue)+" pts   ");
 
 		return buckets.get(position);
 	}
@@ -55,8 +55,10 @@ public class StoreStack {
 	}
 
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
-		return (StackComparator.methodLikelinessMethod(stackTest, stack)
-				+ StackComparator.levensteinMethod(stackTest, stack)) / 2;
+		
+		return StackComparator.pointClassifiers(stackTest, stack) * StackComparator.levensteinMethod(stackTest, stack) ;
+		//return (StackComparator.methodLikelinessMethod(stackTest, stack)
+		//		+ StackComparator.levensteinMethod(stackTest, stack)) / 2;
 	}
 
 	private double getSumValues(List<Double> values) {
