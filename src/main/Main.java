@@ -13,12 +13,13 @@ import process.StoreStack;
 
 public class Main {
 
+	private static String folderName = "nautilus";
 	public static void main(String[] args) {
-		List<Bucket> buckets = BucketCreator.GetAllBucketInFolder("./nautilus/nautilus-training/");
+		List<Bucket> buckets = BucketCreator.GetAllBucketInFolder("./"+folderName+"/nautilus-training/");
 		StoreStack storeStack = new StoreStack(buckets);
 
 		try {
-			File folder = new File("./nautilus/nautilus-testing/");
+			File folder = new File("./"+folderName+"/nautilus-testing/");
 			String[] files = folder.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File current, String name) {
@@ -27,7 +28,7 @@ public class Main {
 			});
 
 			for (String file : files) {
-				Stack stack = StackCreator.getStackFromFilePath("./nautilus/nautilus-testing/" + file);
+				Stack stack = StackCreator.getStackFromFilePath("./"+folderName+"/nautilus-testing/" + file);
 
 				Bucket b = storeStack.getBestBucket(stack);
 
