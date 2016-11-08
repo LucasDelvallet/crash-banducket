@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Bucket;
+import entities.ScoreTestCollector;
 import entities.Stack;
 
 public class StoreStack {
@@ -38,18 +39,21 @@ public class StoreStack {
 	}
 
 	private double getBucketComparisonValue(Stack stack, Bucket bucket) {
+		ScoreTestCollector bucketTest = new ScoreTestCollector();
 		ArrayList<Double> values = new ArrayList<>();
 		List<Stack> stacks = bucket.getStacks();
 
 		double bestValue = 0;
 		for (Stack stackTest : stacks) {
 			double value = getStackComparisonValue(stack, stackTest);
+			bucketTest.add(StackComparator.pointClassifiersTest(stack, stackTest));
 			values.add(value);
 			if (value > bestValue) {
 				bestValue = value;
 			}
 		}
 
+		bucketTest.print();
 		return bestValue;
 		// return getSumValues(values) / values.size();
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Method;
+import entities.ScoreTestCollector;
 import entities.Stack;
 import entities.StackFrame;
 
@@ -84,12 +85,12 @@ public class StackComparator {
 
 		int decalage = 0;
 		
-		for(int i = 0; i < stackFrameTests.size(); i++){
-			if (stackFrames.get(0).method.equals(stackFrameTests.get(i).method)) {
-				decalage = i;
-				break;
-			}
-		}
+		//for(int i = 0; i < stackFrameTests.size(); i++){
+		//	if (stackFrames.get(0).method.equals(stackFrameTests.get(i).method)) {
+		//		decalage = i;
+		//		break;
+		//	}
+		//}
 		
 		for (int i = 0; i < stackFrames.size() && (i + decalage) < stackFrameTests.size(); i++) {
 			StackFrame sF = stackFrames.get(i);
@@ -101,18 +102,62 @@ public class StackComparator {
 			if (sF.path.equals(sFT.path)) {
 				score += (double) ((double) 4 / (double) (i + 1));
 			}
+//			if (sF.path.substring(sF.path.lastIndexOf("/")+1).equals(sFT.path.substring(sFT.path.lastIndexOf("/")+1))) {
+//				score += (double) ((double) 4 / (double) (i + 1));
+//			}
 			if (sF.addr.equals(sFT.addr)) {
 				score += (double) ((double) 3 / (double) (i + 1));
 			}			
 			if (sF.arguments.equals(sFT.arguments)) {
 				score += (double) ((double) 2 / (double) (i + 1));
 			}
-			if (sF.vars.equals(sFT.vars)) {
+			if (!(sF.vars.isEmpty() || sFT.vars.isEmpty()) && sF.vars.equals(sFT.vars)) {
 				score += (double) ((double) 1 / (double) (i + 1));
 			}
 		}
 
 		return score;
+	}
+	
+	public static ScoreTestCollector pointClassifiersTest(Stack stackTest, Stack stack) {
+		ScoreTestCollector test = new ScoreTestCollector();
+		List<StackFrame> stackFrames = stack.getFrames();
+		List<StackFrame> stackFrameTests = stackTest.getFrames();
+
+		int decalage = 0;
+		
+		//for(int i = 0; i < stackFrameTests.size(); i++){
+		//	if (stackFrames.get(0).method.equals(stackFrameTests.get(i).method)) {
+		//		decalage = i;
+		//		break;
+		//	}
+		//}
+		
+		for (int i = 0; i < stackFrames.size() && (i + decalage) < stackFrameTests.size(); i++) {
+			StackFrame sF = stackFrames.get(i);
+			StackFrame sFT = stackFrameTests.get(i + decalage);
+
+			if (sF.method.equals(sFT.method)) {
+				test.upMethScr();
+			}
+			if (sF.path.equals(sFT.path)) {
+				test.upPathScr();
+			}
+//			if (sF.path.substring(sF.path.lastIndexOf("/")+1).equals(sFT.path.substring(sFT.path.lastIndexOf("/")+1))) {
+//				score += (double) ((double) 4 / (double) (i + 1));
+//			}
+			if (sF.addr.equals(sFT.addr)) {
+				test.upAddressScr();
+			}			
+			if (sF.arguments.equals(sFT.arguments)) {
+				test.upArgsScr();
+			}
+			if (!(sF.vars.isEmpty() || sFT.vars.isEmpty()) && sF.vars.equals(sFT.vars)) {
+				test.upVarsScr();
+			}
+		}
+
+		return test;
 	}
 
 }
