@@ -31,7 +31,6 @@ public class Main {
 				Stack stack = StackCreator.getStackFromFilePath("./"+folderName+"/nautilus-testing/" + file);
 
 				Bucket b = storeStack.getBestBucket(stack);
-
 				System.out.println(file.substring(0, file.length() - 4) + "  -> " + b.getId());
 			}
 

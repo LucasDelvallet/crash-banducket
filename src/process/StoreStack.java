@@ -17,7 +17,7 @@ public class StoreStack {
 	public Bucket getBestBucket(Stack stack) {
 		int position = 0;
 		double bestValue = 0;
-
+		ScoreTestCollector.reset();
 		for (int c = 0; c < buckets.size(); c++) {
 			double value = getBucketComparisonValue(stack, buckets.get(c));
 
@@ -32,35 +32,33 @@ public class StoreStack {
 				position = c;
 			}
 		}
-
-		//System.out.print(new DecimalFormat("#.##").format(bestValue)+" pts   ");
+		
+		//ScoreTestCollector.print();
+		//System.out.println(new DecimalFormat("#.##").format(bestValue)+" pts   ");
 
 		return buckets.get(position);
 	}
 
 	private double getBucketComparisonValue(Stack stack, Bucket bucket) {
-		ScoreTestCollector bucketTest = new ScoreTestCollector();
 		ArrayList<Double> values = new ArrayList<>();
 		List<Stack> stacks = bucket.getStacks();
 
 		double bestValue = 0;
 		for (Stack stackTest : stacks) {
 			double value = getStackComparisonValue(stack, stackTest);
-			bucketTest.add(StackComparator.pointClassifiersTest(stack, stackTest));
 			values.add(value);
 			if (value > bestValue) {
 				bestValue = value;
 			}
 		}
 
-		bucketTest.print();
 		return bestValue;
 		// return getSumValues(values) / values.size();
 	}
 
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
-		
-		return StackComparator.pointClassifiers(stackTest, stack) * StackComparator.levensteinMethod(stackTest, stack) ;
+		StackComparator.pointClassifiersTest(stackTest, stack);
+		return StackComparator.pointClassifiersWithOffset(stackTest, stack) ;//* StackComparator.levensteinMethod(stackTest, stack) ;
 		//return (StackComparator.methodLikelinessMethod(stackTest, stack)
 		//		+ StackComparator.levensteinMethod(stackTest, stack)) / 2;
 	}
