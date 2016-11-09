@@ -6,6 +6,7 @@ import java.util.List;
 import entities.Bucket;
 import entities.ScoreTestCollector;
 import entities.Stack;
+import main.Main;
 
 public class StoreStack {
 	private List<Bucket> buckets;
@@ -58,7 +59,18 @@ public class StoreStack {
 
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
 		StackComparator.pointClassifiersTest(stackTest, stack);
-		return StackComparator.pointClassifiersWithOffset(stackTest, stack) ;//* StackComparator.levensteinMethod(stackTest, stack) ;
+		
+		if(Main.METHODNUMBER == 1) {
+		    return StackComparator.levensteinMethod(stackTest, stack);
+		} else if(Main.METHODNUMBER == 2) {
+		    return StackComparator.methodLikelinessMethod(stackTest, stack);
+		} else if(Main.METHODNUMBER == 3) {
+		    return StackComparator.pointClassifiers(stackTest, stack);
+		} else if(Main.METHODNUMBER == 4) {
+		    return StackComparator.levensteinMethod(stackTest, stack)*StackComparator.pointClassifiers(stackTest, stack);
+		}
+		return 0;
+		//return StackComparator.pointClassifiersWithOffset(stackTest, stack) ;//* StackComparator.levensteinMethod(stackTest, stack) ;
 		//return (StackComparator.methodLikelinessMethod(stackTest, stack)
 		//		+ StackComparator.levensteinMethod(stackTest, stack)) / 2;
 	}
