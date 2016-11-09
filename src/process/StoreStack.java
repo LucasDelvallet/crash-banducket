@@ -1,10 +1,8 @@
 package process;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Bucket;
-import entities.ScoreTestCollector;
 import entities.Stack;
 import main.Main;
 
@@ -18,7 +16,6 @@ public class StoreStack {
 	public Bucket getBestBucket(Stack stack) {
 		int position = 0;
 		double bestValue = 0;
-		ScoreTestCollector.reset();
 		for (int c = 0; c < buckets.size(); c++) {
 			double value = getBucketComparisonValue(stack, buckets.get(c));
 
@@ -34,9 +31,6 @@ public class StoreStack {
 			}
 		}
 		
-		//ScoreTestCollector.print();
-		//System.out.println(new DecimalFormat("#.##").format(bestValue)+" pts   ");
-
 		return buckets.get(position);
 	}
 
@@ -54,12 +48,9 @@ public class StoreStack {
 		}
 
 		return bestValue;
-		// return getSumValues(values) / values.size();
 	}
 
-	private double getStackComparisonValue(Stack stackTest, Stack stack) {
-		StackComparator.pointClassifiersTest(stackTest, stack);
-		
+	private double getStackComparisonValue(Stack stackTest, Stack stack) {		
 		if(Main.TEST) {
 			if(Main.METHODNUMBER == 1) {
 			    return StackComparator.levensteinMethod(stackTest, stack);
@@ -75,15 +66,5 @@ public class StoreStack {
 		} else {
 			return StackComparator.pointClassifiers(stackTest, stack)*StackComparator.levensteinMethod(stackTest, stack);
 		}
-	}
-
-	private double getSumValues(List<Double> values) {
-		double res = 0;
-
-		for (Double value : values) {
-			res += value;
-		}
-
-		return res;
 	}
 }
