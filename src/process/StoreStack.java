@@ -60,19 +60,21 @@ public class StoreStack {
 	private double getStackComparisonValue(Stack stackTest, Stack stack) {
 		StackComparator.pointClassifiersTest(stackTest, stack);
 		
-		if(Main.METHODNUMBER == 1) {
-		    return StackComparator.levensteinMethod(stackTest, stack);
-		} else if(Main.METHODNUMBER == 2) {
-		    return StackComparator.methodLikelinessMethod(stackTest, stack);
-		} else if(Main.METHODNUMBER == 3) {
-		    return StackComparator.pointClassifiers(stackTest, stack);
-		} else if(Main.METHODNUMBER == 4) {
-		    return StackComparator.levensteinMethod(stackTest, stack)*StackComparator.pointClassifiers(stackTest, stack);
+		if(Main.TEST) {
+			if(Main.METHODNUMBER == 1) {
+			    return StackComparator.levensteinMethod(stackTest, stack);
+			} else if(Main.METHODNUMBER == 2) {
+			    return StackComparator.methodLikelinessMethod(stackTest, stack);
+			} else if(Main.METHODNUMBER == 3) {
+			    return StackComparator.pointClassifiers(stackTest, stack);
+			} else if(Main.METHODNUMBER == 4) {
+			    return StackComparator.levensteinMethod(stackTest, stack)*StackComparator.pointClassifiers(stackTest, stack);
+			}
+			
+			return 0;
+		} else {
+			return StackComparator.pointClassifiers(stackTest, stack)*StackComparator.levensteinMethod(stackTest, stack);
 		}
-		return 0;
-		//return StackComparator.pointClassifiersWithOffset(stackTest, stack) ;//* StackComparator.levensteinMethod(stackTest, stack) ;
-		//return (StackComparator.methodLikelinessMethod(stackTest, stack)
-		//		+ StackComparator.levensteinMethod(stackTest, stack)) / 2;
 	}
 
 	private double getSumValues(List<Double> values) {

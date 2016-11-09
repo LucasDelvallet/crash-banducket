@@ -1,74 +1,23 @@
-#0  0x00007f182a1ae36a from /lib/libc.so.6
-#1  0x000000000049ccf1 at /usr/include/stdlib.h:291
-	state = (ThumbnailState *) 0x1d8e4b0
-	file_size = 1828114
-	file_contents = 0x1de4480 "�\202\001"
-	result = <value optimized out>
-	directory = (NautilusDirectory *) 0xda68a0
-	pixbuf = (GdkPixbuf *) 0x1853680
-	location = <value optimized out>
-#2  0x00007f182bcae61e at /build/buildd/glib2.0-2.15.3/gio/gfile.c:4476
-	stream = <value optimized out>
-	data = <value optimized out>
-	res = (GSimpleAsyncResult *) 0x9f89e0
-#3  0x00007f182bcbf97b at /build/buildd/glib2.0-2.15.3/gio/ginputstream.c:487
-	stream = (GInputStream *) 0x7f1818007300
-#4  0x00007f182bcc802c at /build/buildd/glib2.0-2.15.3/gio/gsimpleasyncresult.c:563
+#3  0xb7e27e24 in _gnome_vfs_job_execute (job=0x80a2520) at gnome-vfs-job.c:1751
 No locals.
-#5  0x00007f182b5c13e4 at /build/buildd/glib2.0-2.15.3/glib/gmain.c:2064
+#0  0xb732c2eb in g_hash_table_foreach_remove_or_steal (hash_table=0x80fed80, 
+    func=0xb7e30b30 <remove_one_stack>, user_data=0x0, notify=1)
+    at /build/buildd/glib2.0-2.14.1/glib/ghash.c:620
+	node = (GHashNode *) 0x80fed80
+	prev = (GHashNode *) 0x0
+	i = 11
+	deleted = 0
+#1  0xb7e309bc in clear_stack_table (stack_table=0x0) at gnome-vfs-module-callback.c:389
 No locals.
-#6  0x00007f182b5c46f5 at /build/buildd/glib2.0-2.15.3/glib/gmain.c:2697
-	got_ownership = <value optimized out>
-	max_priority = 0
-	timeout = 0
-	some_ready = 1
-	nfds = <value optimized out>
-	allocated_nfds = <value optimized out>
-	fds = (GPollFD *) 0x15d66b0
-	__PRETTY_FUNCTION__ = "g_main_context_iterate"
-#7  0x00007f182b5c4a15 at /build/buildd/glib2.0-2.15.3/glib/gmain.c:2905
-	got_ownership = 709764112
-	self = (GThread *) 0x74a500
-	__PRETTY_FUNCTION__ = "IA__g_main_loop_run"
-#8  0x00007f182d00d803 at /build/buildd/gtk+2.0-2.12.5/gtk/gtkmain.c:1163
-	tmp_list = (GList *) 0x7c98f0
-	functions = (GList *) 0x0
-	init = (GtkInitFunction *) 0x7910a0
-	loop = (GMainLoop *) 0x7c98f0
-#9  0x000000000043d942 at nautilus-main.c:571
-	kill_shell = 0
-	restart_shell = 0
-	no_default_window = 1
-	browser_window = 0
-	no_desktop = 0
-	startup_id = <value optimized out>
-	startup_id_copy = 0x7c98f0 ""
-	session_to_load = 0x0
-	geometry = (gchar *) 0x0
-	remaining = (const gchar **) 0x0
-	perform_self_check = 0
-	context = (GOptionContext *) 0x1000003
-	application = (NautilusApplication *) 0x7910a0
-	program = (GnomeProgram *) 0x769850
-	options = {{long_name = 0x4f33e7 "check", short_name = 99 'c', flags = 0, arg = G_OPTION_ARG_NONE, 
-    arg_data = 0x7fff378e74b8, description = 0x4f3410 "Perform a quick set of self-check tests.", arg_description = 0x0}, {
-    long_name = 0x4f69a7 "geometry", short_name = 103 'g', flags = 0, arg = G_OPTION_ARG_STRING, arg_data = 0x7fff378e74a8, 
-    description = 0x4f3440 "Create the initial window with the given geometry.", arg_description = 0x4f325e "GEOMETRY"}, {
-    long_name = 0x4f3267 "no-default-window", short_name = 110 'n', flags = 0, arg = G_OPTION_ARG_NONE, 
-    arg_data = 0x7fff378e74c4, description = 0x4f3478 "Only create windows for explicitly specified URIs.", 
-    arg_description = 0x0}, {long_name = 0x4f3279 "no-desktop", short_name = 0 '\0', flags = 0, arg = G_OPTION_ARG_NONE, 
-    arg_data = 0x7fff378e74bc, 
-    description = 0x4f34b0 "Do not manage the desktop (ignore the preference set in the preferences dialog).", 
-    arg_description = 0x0}, {long_name = 0x4f592a "browser", short_name = 0 '\0', flags = 0, arg = G_OPTION_ARG_NONE, 
-    arg_data = 0x7fff378e74c0, description = 0x4f3284 "open a browser window.", arg_description = 0x0}, {
-    long_name = 0x4f33ef "quit", short_name = 113 'q', flags = 0, arg = G_OPTION_ARG_NONE, arg_data = 0x7fff378e74cc, 
-    description = 0x4f329b "Quit Nautilus.", arg_description = 0x0}, {long_name = 0x4f33f6 "restart", short_name = 0 '\0', 
-    flags = 1, arg = G_OPTION_ARG_NONE, arg_data = 0x7fff378e74c8, description = 0x4f32aa "Restart Nautilus.", 
-    arg_description = 0x0}, {long_name = 0x4f7d56 "", short_name = 0 '\0', flags = 0, arg = G_OPTION_ARG_STRING_ARRAY, 
-    arg_data = 0x7fff378e74a0, description = 0x0, arg_description = 0x4f32bc "[URI...]"}, {long_name = 0x4ef8e4 "load-session", 
-    short_name = 108 'l', flags = 0, arg = G_OPTION_ARG_STRING, arg_data = 0x7fff378e74b0, 
-    description = 0x4f3508 "Load a saved session from the specified file. Implies \"--no-default-window\".", 
-    arg_description = 0x4f32c5 "FILENAME"}, {long_name = 0x0, short_name = 0 '\0', flags = 0, arg = G_OPTION_ARG_NONE, 
-    arg_data = 0x0, description = 0x0, arg_description = 0x0}}
-#10 0x00007f182a1961c4 from /lib/libc.so.6
-#11 0x000000000042d069 
+#2  0xb7e30a37 in _gnome_vfs_module_callback_clear_stacks () at gnome-vfs-module-callback.c:961
+No locals.
+#4  0xb7e273ca in thread_entry_point (data=0x80a2520, user_data=0x0) at gnome-vfs-job-queue.c:65
+	complete = <value optimized out>
+#5  0xb735e0c8 in g_thread_pool_thread_proxy (data=0x8084590)
+    at /build/buildd/glib2.0-2.14.1/glib/gthreadpool.c:265
+	task = (gpointer) 0x80a2520
+	pool = (GRealThreadPool *) 0x8084590
+#6  0xb735c5af in g_thread_create_proxy (data=0x836ff00) at /build/buildd/glib2.0-2.14.1/glib/gthread.c:635
+	__PRETTY_FUNCTION__ = "g_thread_create_proxy"
+#7  0xb72f746b in start_thread () from /lib/tls/i686/cmov/libpthread.so.0
+#8  0xb727a6de in clone () from /lib/tls/i686/cmov/libc.so.6
